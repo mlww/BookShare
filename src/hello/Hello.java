@@ -8,8 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import hello.livre.Auteur;
-import hello.livre.Cotisation;
 import hello.livre.Livre;
+import hello.livre.exceptions.BirthdateException;
 
 /**
  * @author Dell
@@ -21,7 +21,7 @@ public class Hello {
 	 * @param args
 	 * @throws ParseException 
 	 */
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws ParseException { //tableau de chaine de nom de args
 		// TODO Auto-generated method stub
 		System.out.println("Hello Java");
 		
@@ -45,7 +45,7 @@ public class Hello {
 		.numAdherent("565666"); 
 	    //.setNbLivres(35)
         //.setCotisation(cotisation);
-		((Loueur)alien).nbLivres(35); // cast de alien qui est Utlisateur, pour le transformer en Loueur (et utiliser ses attributs)
+		((Loueur)alien).nbLivres(35); // cast de alien qui est Utilisateur, pour le transformer en Loueur (et utiliser ses attributs)
 
 
        //  System.out.println("retour maison : " + alien.getNom() + " " + alien.getPrenom() + " La cotisation est: " + alien.getCotisation());
@@ -68,12 +68,14 @@ public class Hello {
 		@SuppressWarnings("deprecation")
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 		Date date = format.parse("1960-05-09");
-		Auteur werber = Auteur.getAuteur("Werber", "Bernard", date);
-		if (werber == null) {
-			System.out.println("Impossible d'instancier Werber");
-		} else {
-		System.out.println("Auteur: " + werber.getNom() + " " + werber.getPrenom()+ " né le " + werber.getNaissance());
-	}
+		Auteur werber;
+		try {
+			werber = Auteur.getAuteur("Werber", "Bernard", date);
+			System.out.println("Auteur: " + werber.getNom() + " " + werber.getPrenom()+ " né le " + werber.getNaissance());
+		} catch (BirthdateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 }

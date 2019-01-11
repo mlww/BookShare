@@ -7,7 +7,7 @@ package hello;
  * @author Dell
  *
  */
-abstract public class Utilisateur {
+abstract public class Utilisateur { // abstract: on ne peut pas instancier de new Utliisateur
 	protected String nom;
 	protected String prenom;
 	protected String numAdherent;
